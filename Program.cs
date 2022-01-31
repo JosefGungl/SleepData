@@ -7,6 +7,9 @@ namespace SleepData
     {
         static void Main(string[] args)
         {
+
+            string file = "data.txt";
+
             // ask for input
             Console.WriteLine("Enter 1 to create data file.");
             Console.WriteLine("Enter 2 to parse data.");
@@ -34,7 +37,11 @@ namespace SleepData
                 Random rnd = new Random();
 
                 // create file
-                StreamWriter sw = new StreamWriter("data.txt");
+                
+            
+
+                StreamWriter sw = new StreamWriter(file);
+                
 
                 // loop for the desired # of weeks
                 while (dataDate < dataEndDate)
@@ -56,9 +63,50 @@ namespace SleepData
             }
             else if (resp == "2")
             {
-                // TODO: parse data file
+                 if (File.Exists(file))
+                    {
+                        StreamReader sr = new StreamReader(file);
+                        while (!sr.EndOfStream)
+                        {
+                            //get dates from .txt and convert to DateTime
+                            string line = sr.ReadLine();
+                            string date = line.Split(",")[0];
+                            string month = date.Split("/")[0];
+                            int newMonth = Int32.Parse(month);
+                            string day = date.Split("/")[1];
+                            int newDay = Int32.Parse(day);
+                            string year = date.Split("/")[2];
+                            int newYear = Int32.Parse(year);
+                            var newDate = new DateTime(newYear, newMonth, newDay);
+                            //output "week of..."
+                            Console.WriteLine($"Week of {newDate:MMM}, {newDate:dd}, {newDate:yyyy}");
+
+                            //get ours of sleep from .txt
+                            string hours = line.Split(",")[1];
+                            int mon = Int32.Parse(hours.Split("|")[0]);
+                            int tues = Int32.Parse(hours.Split("|")[1]);
+                            int wed = Int32.Parse(hours.Split("|")[2]);
+                            int thur = Int32.Parse(hours.Split("|")[3]);
+                            int fri = Int32.Parse(hours.Split("|")[4]);
+                            int sat = Int32.Parse(hours.Split("|")[5]);
+                            int sun = Int32.Parse(hours.Split("|")[6]);
+
+                            //output week
+                            Console.WriteLine("Mo Tu We Th Fr Sa Su");
+                            Console.WriteLine("-- -- -- -- -- -- --");
+                            Console.WriteLine($"{mon, 2} {tues, 2} {wed, 2} {thur, 2} {fri, 2} {sat, 2} {sun, 2}");
+                            Console.WriteLine("");
+
+
+                        }
+                        sr.Close();
+                    }
+                    else
+                    {
+                        Console.WriteLine("File does not exist");
+                    }
+                }
 
             }
         }
     }
-}
