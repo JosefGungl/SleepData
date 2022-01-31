@@ -7,7 +7,7 @@ namespace SleepData
     {
         static void Main(string[] args)
         {
-                        // ask for input
+            // ask for input
             Console.WriteLine("Enter 1 to create data file.");
             Console.WriteLine("Enter 2 to parse data.");
             Console.WriteLine("Enter anything else to quit.");
@@ -23,7 +23,7 @@ namespace SleepData
                 // input the response (convert to int)
                 int weeks = int.Parse(Console.ReadLine());
                 
-                                 // determine start and end date
+                // determine start and end date
                 DateTime today = DateTime.Now;
                 // we want full weeks sunday - saturday
                 DateTime dataEndDate = today.AddDays(-(int)today.DayOfWeek);
@@ -33,7 +33,7 @@ namespace SleepData
                 // random number generator
                 Random rnd = new Random();
 
-                                // create file
+                // create file
                 StreamWriter sw = new StreamWriter("data.txt");
 
                 // loop for the desired # of weeks
@@ -47,7 +47,7 @@ namespace SleepData
                         hours[i] = rnd.Next(4, 13);
                     }
                     // M/d/yyyy,#|#|#|#|#|#|#
-                                        //Console.WriteLine($"{dataDate:M/d/yy},{string.Join("|", hours)}");
+                    //Console.WriteLine($"{dataDate:M/d/yy},{string.Join("|", hours)}");
                     sw.WriteLine($"{dataDate:M/d/yyyy},{string.Join("|", hours)}");
                     // add 1 week to date
                     dataDate = dataDate.AddDays(7);
