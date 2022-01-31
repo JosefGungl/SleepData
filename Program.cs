@@ -91,10 +91,19 @@ namespace SleepData
                             int sat = Int32.Parse(hours.Split("|")[5]);
                             int sun = Int32.Parse(hours.Split("|")[6]);
 
+                            //EC variables
+                            int total = mon+tues+wed+thur+fri+sat+sun;
+                            float avg = total / 7;
+                            float avg2 = total % 7;
+                            string avg3 = $"{avg}.{avg2}";
+                            avg = float.Parse(avg3);
+
+
+
                             //output week
-                            Console.WriteLine("Mo Tu We Th Fr Sa Su");
-                            Console.WriteLine("-- -- -- -- -- -- --");
-                            Console.WriteLine($"{mon, 2} {tues, 2} {wed, 2} {thur, 2} {fri, 2} {sat, 2} {sun, 2}");
+                            Console.WriteLine(" Mo Tu We Th Fr Sa Su Tot Avg");
+                            Console.WriteLine(" -- -- -- -- -- -- -- --- ---");
+                            Console.WriteLine($" {mon, 2} {tues, 2} {wed, 2} {thur, 2} {fri, 2} {sat, 2} {sun, 2} {total,3} {avg, 2}");
                             Console.WriteLine("");
 
 
